@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from regression_model.predict import make_prediction
 
 from api.config import get_logger
@@ -22,7 +22,7 @@ def predict():
         json_data = request.get_json()
         _logger.debug(f'Inputs: {json_data}')
 
-        result = make_prediction(input_data=input_data)
+        result = make_prediction(input_data=json_data)
         _logger.debug(f'Outputs: {result}')
 
         predictions = result.get('predictions')[0]
